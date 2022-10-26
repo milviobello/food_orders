@@ -1,0 +1,30 @@
+[
+	{
+		"IndexName": "CustomerName-PriceEach-Index", 
+		"KeySchema":[
+			{"AttributeName":"CustomerName","KeyType":"HASH"}, {"AttributeName":"PriceEach","KeyType":"RANGE"}
+		], 
+		"Projection":{"ProjectionType":"ALL"}
+	},
+	{
+		"IndexName": "CustomerName-OrderStatus-Index", 
+		"KeySchema":[
+			{"AttributeName":"CustomerName","KeyType":"HASH"}, {"AttributeName":"OrderStatus","KeyType":"RANGE"}
+		], 
+		"Projection":{"ProjectionType":"ALL"}
+	},
+	{
+		"IndexName": "CustomerName-ItemOrdered-Index", 
+		"KeySchema":[
+			{"AttributeName":"CustomerName","KeyType":"HASH"}, {"AttributeName":"ItemOrdered","KeyType":"RANGE"}
+		], 
+		"Projection":{"ProjectionType":"ALL"}
+	},
+	{
+		"IndexName": "CustomerName-QuantityOrdered-Index", 
+		"KeySchema":[
+			{"AttributeName":"CustomerName","KeyType":"HASH"}, {"AttributeName":"QuantityOrdered","KeyType":"RANGE"}
+		], 
+		"Projection":{"ProjectionType":"ALL"}
+	}
+]

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.657.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		// globals
+		const MY_NEW_FOOD_ORDER_QUEUE_URL = "https://sqs.us-east-1.amazonaws.com/142143938041/MyNewFoofOrdersQueue.fifo";
+		AWS.config.region = 'us-east-1'; // Region
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    		IdentityPoolId: '',
+		});
+		// AWS.config.region = 'us-east-1';
+		// AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    	// 	//IdentityPoolId: 'us-east-1:d3473b1f-291d-4de0-b154-93dcdb55d2da' // amazon-3
+    	// 	IdentityPoolId: 'us-east-1:5e6db006-36b9-4910-bcba-55a3d9fed12b', // amazon
+		// });
+		const SQS = new AWS.SQS({apiVersion: '2012-11-05'});
+		const DDB = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
+		const SNS = new AWS.SNS({apiVersion: '2010-03-31'});
+	</script>
+	<script src="admin-orders.js"></script>
+	<script src="admin-queue.js"></script>
+</head>
+<body>
+	<div style="text-align:center;">
+		<div style="display:inline-block;margin: 0 auto;">
+			<div style="text-align:right;">
+				Customer Name : <input id="customerName" placeholder="Example : Xibing" /><br />
+				Customer Phone : <input id="customerPhone" placeholder="Example : +525574042022" /><br />
+				Item Ordered : <input id="itemOrdered" placeholder="Example : Large Pizza" /><br />
+				Quantity Ordered : <input id="quantityOrdered" placeholder="Example : 2" /><br />
+				Price Each : <input id="priceEach" placeholder="Example : 10.99" />
+			</div>
+		</div>
+		<br />
+		<button onclick="sendOrderToNewFoodOrderQueue();">Place New Order</button>
+		<br />
+		<h1>Orders :</h1>
+		<div style="display:inline-block;margin: 0 auto;">
+			<select id="selectOrderStatus">
+				<option value="ALL" selected>All</option>
+				<option value="NEW">New</option>
+				<option value="DELIVERED">Delivered</option>
+			</select>
+			<button onclick="fetchOrders();">Fetch Orders</button>
+			<br />
+			<span id="ordersTable">
+				<!-- Orders Table goes here -->
+			</span>
+		</div>
+		<p></p>
+		<h1>Raw Response :</h1>
+		<div style="text-align:center;"></div>
+			<textarea id="responseArea" cols="75" rows="20">
+			</textarea>
+		</div>
+	</div>
+</body>
+</html>
